@@ -1,6 +1,8 @@
 package com.springstudy.projectmap.direction.service
 
 import com.springstudy.projectmap.api.dto.DocumentDto
+import com.springstudy.projectmap.api.service.KakaoCategorySearchService
+import com.springstudy.projectmap.direction.repository.DirectionRepository
 import com.springstudy.projectmap.pharmacy.dto.PharmacyDto
 import com.springstudy.projectmap.pharmacy.service.PharmacySearchService
 import spock.lang.Specification
@@ -8,8 +10,10 @@ import spock.lang.Specification
 class DirectionServiceTest extends Specification {
 
     private PharmacySearchService pharmacySearchService = Mock()
+    private DirectionRepository directionRepository = Mock()
+    private KakaoCategorySearchService kakaoCategorySearchService = Mock()
 
-    private DirectionService directionService = new DirectionService(pharmacySearchService)
+    private DirectionService directionService = new DirectionService(pharmacySearchService, directionRepository, kakaoCategorySearchService)
 
     private List<PharmacyDto> pharmacyList
 
