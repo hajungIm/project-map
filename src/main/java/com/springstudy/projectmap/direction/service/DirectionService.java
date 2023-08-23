@@ -1,6 +1,7 @@
 package com.springstudy.projectmap.direction.service;
 
 import com.springstudy.projectmap.api.dto.DocumentDto;
+import com.springstudy.projectmap.api.service.KakaoCategorySearchService;
 import com.springstudy.projectmap.direction.entity.Direction;
 import com.springstudy.projectmap.direction.repository.DirectionRepository;
 import com.springstudy.projectmap.pharmacy.service.PharmacySearchService;
@@ -58,6 +59,31 @@ public class DirectionService {
                                 .build())
                 .filter(direction -> direction.getDistance() <= RADIUS_KM)
                 .sorted(Comparator.comparing(Direction::getDistance))
+                .limit(MAX_SEARCH_COUNT)
+                .collect(Collectors.toList());
+
+    }
+
+    // pharmacy search by category kakao api
+    public List<Direction> buildDirectionListByCategoryApi(DocumentDto inputDocumentDto) {
+
+        if (Objects.isNull(inputDocumentDto))
+            return Collections.emptyList();
+
+        return kakaoCategorySearchService
+                .requestPharmacyCategorySearch(inputDocumentDto.getLatitude(), inputDocumentDto.getLongitude(), RADIUS_KM)
+                .getDocumentList()
+                .stream().map(resultDocumentDto ->
+                        Direction.builder()
+                                .inputAddress(inputDocumentDto.getAddressName())
+                                .inputLatitude(inputDocumentDto.getLatitude())
+                                .inputLongitude(inputDocumentDto.getLongitude())
+                                .targetPharmacyName(resultDocumentDto.getPlaceName())
+                                .targetAddress(resultDocumentDto.getAddressName())
+                                .targetLatitude(resultDocumentDto.getLatitude())
+                                .targetLongitude(resultDocumentDto.getLongitude())
+                                .distance(resultDocumentDto.getDistance() * 0.001) // km 단위
+                                .build())
                 .limit(MAX_SEARCH_COUNT)
                 .collect(Collectors.toList());
 
