@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-    url: jdbc:tc:mariadb:10:///
+    url: jdbc:tc:mariadb:10:///pharmacy-recommendation
   jpa:
     hibernate:
       ddl-auto: create
@@ -12,7 +12,7 @@ pharmacy:
     base:
       url: http://localhost:8080/dir/
 
-#kakao:
-#  rest:
-#    api:
-#      key: ${KAKAO_REST_API_KEY}
+kakao:
+  rest:
+    api:
+      key: ${KAKAO_REST_API_KEY}

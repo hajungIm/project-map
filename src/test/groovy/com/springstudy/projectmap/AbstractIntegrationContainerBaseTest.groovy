@@ -10,10 +10,6 @@ abstract class AbstractIntegrationContainerBaseTest extends Specification{
     static final GenericContainer MY_REDIS_CONTAINER
 
     static {
-        System.setProperty("spring.config.location", "classpath:/application.yml,classpath:/application-private.yml");
-    }
-
-    static {
         MY_REDIS_CONTAINER = new GenericContainer<>("redis:6")
             .withExposedPorts(6379)
 
