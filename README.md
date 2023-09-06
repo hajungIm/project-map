@@ -50,6 +50,11 @@
 - base62를 이용한 shorten url 개발하기 (길안내 URL)
 - redis를 이용하여 성능 최적화하기
 
+## 데모 영상
+
+[데모 영상 확인하기](https://drive.google.com/file/d/1T5KfwOAKJBkEd-cByp5SYkK-nCnkMgYm/view?usp=sharing)
+
+
 ## Tech Stack
 - JDK 11
 - Spring Boot 2.6.7
